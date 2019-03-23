@@ -1,3 +1,4 @@
+
 {
   "manifest_version": 2,
   "name": "Chrr Blssm",
@@ -13,8 +14,8 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["overlay.js"],
-      "css": ["overlay.css"]
+      "css": ["overlay.css"],
+      "js": ["overlay.js"]
     }
   ],
 
