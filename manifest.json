@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Chrr Blssm",
+  "description": "Helps us to measure your daily mood",
+  "version": "1",
+  "author": "Ozlem Niksch",
+  "browser_action": {
+    "default_title": "Hello Sunshine!",
+    "default_popup": "popup.html",
+    "default_icon": "cherry.png"
+  },
+
+  "permissions": ["activeTab"]
+}
+
+// "chrome_url_overrides": {
+//   "newtab": "newtab.html"
+// }
