@@ -9,6 +9,13 @@
     "default_popup": "popup.html",
     "default_icon": "cherry.png"
   },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["overlay.js"],
+      "css": ["overlay.css"]
+    },
 
   "permissions": ["activeTab"]
 }
