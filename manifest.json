@@ -11,6 +11,11 @@
     "default_icon": "cherry.png"
   },
   
+  "background": {
+    "scripts": ["bg.js"],
+    "persistent": false
+  },
+
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
