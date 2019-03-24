@@ -9,21 +9,10 @@
     "default_popup": "popup.html",
     "default_icon": "cherry.png"
   },
-
   "background": {
     "scripts": ["bg.js"],
     "persistent": false
   },
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "MacCtrl+Shift+F"
-      },
-      "description": "Opens popup.html"
-    }
-  },
-
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
@@ -31,12 +20,6 @@
       "js": ["overlay.js"]
     }
   ],
-
   "web_accessible_resources": ["*.png"],
-
   "permissions": ["activeTab", "storage"]
 }
-
-// "chrome_url_overrides": {
-//   "newtab": "newtab.html"
-// }
