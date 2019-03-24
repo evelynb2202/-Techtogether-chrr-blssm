@@ -1,34 +1,55 @@
 //gets from storage or initializes array of past moods
-if(chrome.storage.local.get(["moodHistoryStored"]) == true) {
-	var moodHistory = chrome.storage.local.get(["moodHistoryStored"]);
-} else {
-	var moodHistory = new Array();
-}
+
+var moodHistory = new Array();
+
+chrome.storage.local.get(["moodHistoryStored"], function(result) {
+	if (typeof result.moodHistoryStored !== 'undefined') {
+		moodHistory = result.moodHistoryStored;
+		console.log(moodHistory);
+	} else {
+		console.log("hist initd")
+	}
+});
+console.log("a");
+console.log(moodHistory);
+
+console.log("b");
 
 //interval between asking for mood
-if(chrome.storage.local.get(["intervalStored"]) == true) {
-	var interval = chrome.storage.local.get(["intervalStored"]);
-} else {
-	var interval = 86400000; // 24h in milliseconds
-}
+
+var interval = 86400000; // 24h in milliseconds
+
+chrome.storage.local.get(["intervalStored"], function(result) {
+	if (typeof result.intervalStored !== 'undefined') {
+		interval = result.intervalStored;
+		console.log(interval);
+	} else {
+		console.log("int initd")
+	}
+	chrome.storage.local.set({"intervalStored": interval});
+});
 
 //last time asked, if none found, defaults to date decades ago
-if(chrome.storage.local.get(["lastAskedStored"]) == true) {
-	var lastAsked = chrome.storage.local.get(["lastAskedStored"]);
-} else {
-	var lastAsked = 0; //Jan 1, 1970, Unix epoch
-}
+var lastAsked = 0; //Jan 1, 1970, Unix epoch
 
-var lastAsked = get("lastAskedStored");
+chrome.storage.local.get(["lastAskedStored"], function(result) {
+	if (typeof result.lastAskedStored !== 'undefined') {
+		lastAskedStored = result.lastAskedStored;
+		console.log(lastAskedStored);
+	} else {
+		console.log("lastask inited")
+	}
+});
 
+//listen for messages
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    lastAsked = Date.now;
-    chrome.storage.local.set({"lastAskedStored": lastAsked});
-    moodHistory.push({time:Date.now, mood:request.answer1});
-    chrome.storage.local.set({"moodHistoryStored": moodHistory});
-    console.log(moodHistory);
+    if (typeof request.answer1 !== 'undefined') {
+    	var d = new Date();
+	    lastAsked = d.getTime();
+	    chrome.storage.local.set({"lastAskedStored": lastAsked});
+	    moodHistory.push({"time":lastAsked, "mood":request.answer1});
+    	chrome.storage.local.set({"moodHistoryStored": moodHistory});
+    	console.log("answer noted");
+	}
   });
