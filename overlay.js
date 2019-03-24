@@ -5,18 +5,6 @@ odiv.className = "chrr-blssm-ext-ol";
 document.body.appendChild(odiv); 
 odiv.style.backgroundImage = "url(" + chrome.extension.getURL('chr-blssm-q1.png') + ")";
 
-//close button
-// var close=document.createElement("div");
-// close.className ="chrr-blssm-close-bt";
-// close.innerText="X";
-// close.style.cursor - 'pointer';
-// close.onclick = function() {
-// 	odiv.style.display = "none";
-// };
-// odiv.appendChild(close);
-
-
-
 //left answer button set up for question 1
 var btL=document.createElement("div");
 btL.className = "chr-blssm-bt-left";
