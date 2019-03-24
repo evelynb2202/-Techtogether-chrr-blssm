@@ -19,7 +19,7 @@
     }
   ],
 
-  "web_accessible_resources": ["chrr-blssm-q1.png"],
+  "web_accessible_resources": ["*.png"],
 
   "permissions": ["activeTab"]
 }

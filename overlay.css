@@ -8,8 +8,30 @@
   right: 50px;
   background-color: white;
   z-index: 999;
+
+  box-shadow: 5px 10px rgba(64,64,64,0.5);
 }
 
 .chrr-blssm-close-bt {
 
+}
+
+.chr-blssm-bt-left {
+	display: none;
+	background-size: cover;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 140px;
+	left: 40px;
+}
+
+.chr-blssm-bt-right {
+	display: none;
+	background-size: cover;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 140px;
+	right: 40px;
 }
