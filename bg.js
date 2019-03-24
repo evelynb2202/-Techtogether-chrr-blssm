@@ -34,8 +34,8 @@ var lastAsked = 0; //Jan 1, 1970, Unix epoch
 
 chrome.storage.local.get(["lastAskedStored"], function(result) {
 	if (typeof result.lastAskedStored !== 'undefined') {
-		lastAskedStored = result.lastAskedStored;
-		console.log(lastAskedStored);
+		lastAsked = result.lastAskedStored;
+		console.log(lastAsked);
 	} else {
 		console.log("lastask inited")
 	}
@@ -44,12 +44,25 @@ chrome.storage.local.get(["lastAskedStored"], function(result) {
 //listen for messages
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+  	var d = new Date();
+
     if (typeof request.answer1 !== 'undefined') {
-    	var d = new Date();
+    	
 	    lastAsked = d.getTime();
 	    chrome.storage.local.set({"lastAskedStored": lastAsked});
 	    moodHistory.push({"time":lastAsked, "mood":request.answer1});
     	chrome.storage.local.set({"moodHistoryStored": moodHistory});
     	console.log("answer noted");
 	}
-  });
+
+    if (typeof request.show !== 'undefined') {
+    	if (lastAsked + interval < d.getTime()) {
+    		sendResponse({show:true});
+    		console.log(lastAsked);
+    		console.log(d.getTime())
+    	} else {
+    		sendResponse({show:false});
+    		console.log("show: f")
+    	}
+    }
+ });

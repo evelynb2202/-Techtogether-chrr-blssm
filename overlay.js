@@ -5,6 +5,15 @@ odiv.className = "chrr-blssm-ext-ol";
 document.body.appendChild(odiv); 
 odiv.style.backgroundImage = "url(" + chrome.extension.getURL('chr-blssm-q1.png') + ")";
 
+odiv.style.display = "none";
+
+chrome.runtime.sendMessage({"show":true}, function(response) {
+	if (response.show == true) {
+		odiv.style.display = "block"
+	};
+	console.log("show?" + response.show);
+});
+
 //left answer button set up for question 1
 var btL=document.createElement("div");
 btL.className = "chr-blssm-bt-left";
